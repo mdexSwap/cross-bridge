@@ -34,6 +34,7 @@ export interface BridgeProxyInterface extends utils.Interface {
     "executors(address)": FunctionFragment;
     "feeTo()": FunctionFragment;
     "owner()": FunctionFragment;
+    "pause()": FunctionFragment;
     "paused()": FunctionFragment;
     "renounceOwnership()": FunctionFragment;
     "setBridgeTokens(address[],bool)": FunctionFragment;
@@ -42,6 +43,7 @@ export interface BridgeProxyInterface extends utils.Interface {
     "setVerifiers(address[],bool)": FunctionFragment;
     "supportTokens(address)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
+    "unpause()": FunctionFragment;
     "verifiers(address)": FunctionFragment;
   };
 
@@ -53,6 +55,7 @@ export interface BridgeProxyInterface extends utils.Interface {
       | "executors"
       | "feeTo"
       | "owner"
+      | "pause"
       | "paused"
       | "renounceOwnership"
       | "setBridgeTokens"
@@ -61,6 +64,7 @@ export interface BridgeProxyInterface extends utils.Interface {
       | "setVerifiers"
       | "supportTokens"
       | "transferOwnership"
+      | "unpause"
       | "verifiers"
   ): FunctionFragment;
 
@@ -82,6 +86,7 @@ export interface BridgeProxyInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "feeTo", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "pause", values?: undefined): string;
   encodeFunctionData(functionFragment: "paused", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "renounceOwnership",
@@ -111,6 +116,7 @@ export interface BridgeProxyInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     values: [PromiseOrValue<string>]
   ): string;
+  encodeFunctionData(functionFragment: "unpause", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "verifiers",
     values: [PromiseOrValue<string>]
@@ -131,6 +137,7 @@ export interface BridgeProxyInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "executors", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "feeTo", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "pause", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "renounceOwnership",
@@ -157,6 +164,7 @@ export interface BridgeProxyInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "unpause", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "verifiers", data: BytesLike): Result;
 
   events: {
@@ -240,6 +248,10 @@ export interface BridgeProxy extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
+    pause(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     paused(overrides?: CallOverrides): Promise<[boolean]>;
 
     renounceOwnership(
@@ -279,6 +291,10 @@ export interface BridgeProxy extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    unpause(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     verifiers(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -299,6 +315,10 @@ export interface BridgeProxy extends BaseContract {
   feeTo(overrides?: CallOverrides): Promise<string>;
 
   owner(overrides?: CallOverrides): Promise<string>;
+
+  pause(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   paused(overrides?: CallOverrides): Promise<boolean>;
 
@@ -339,6 +359,10 @@ export interface BridgeProxy extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  unpause(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   verifiers(
     arg0: PromiseOrValue<string>,
     overrides?: CallOverrides
@@ -359,6 +383,8 @@ export interface BridgeProxy extends BaseContract {
     feeTo(overrides?: CallOverrides): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
+
+    pause(overrides?: CallOverrides): Promise<void>;
 
     paused(overrides?: CallOverrides): Promise<boolean>;
 
@@ -396,6 +422,8 @@ export interface BridgeProxy extends BaseContract {
       newOwner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    unpause(overrides?: CallOverrides): Promise<void>;
 
     verifiers(
       arg0: PromiseOrValue<string>,
@@ -440,6 +468,10 @@ export interface BridgeProxy extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
+    pause(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     paused(overrides?: CallOverrides): Promise<BigNumber>;
 
     renounceOwnership(
@@ -479,6 +511,10 @@ export interface BridgeProxy extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    unpause(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     verifiers(
       arg0: PromiseOrValue<string>,
       overrides?: CallOverrides
@@ -506,6 +542,10 @@ export interface BridgeProxy extends BaseContract {
     feeTo(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    pause(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     paused(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -543,6 +583,10 @@ export interface BridgeProxy extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    unpause(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

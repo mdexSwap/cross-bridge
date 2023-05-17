@@ -95,11 +95,11 @@ contract ChainBridge is BridgeProxy {
         }
 
         if (_order.supportMinting) {
-            IERC20(_order.token).burnFrom(msg.sender, _order.amount);
+            IERC20(_order.token).burnFrom(_order.user, _order.amount);
         } else {
             TransferHelper.safeTransferFrom(
                 _order.token,
-                msg.sender,
+                _order.user,
                 address(this),
                 _order.amount
             );

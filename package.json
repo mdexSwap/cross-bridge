@@ -1,5 +1,5 @@
 {
-    "name": "cross-bridge",
+    "name": "token-bridge",
     "version": "1.0.0",
     "main": "index.js",
     "license": "MIT",
@@ -27,6 +27,7 @@
     },
     "dependencies": {
         "@openzeppelin/contracts": "^4.8.1",
+        "dayjs": "^1.11.7",
         "dotenv": "^16.0.3"
     }
 }

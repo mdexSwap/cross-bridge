@@ -122,6 +122,7 @@ export interface ChainBridgeInterface extends utils.Interface {
     "executors(address)": FunctionFragment;
     "feeTo()": FunctionFragment;
     "owner()": FunctionFragment;
+    "pause()": FunctionFragment;
     "paused()": FunctionFragment;
     "performDepositChain((bytes32,address,address,uint256,uint256,address,bool,uint256,uint256,uint256,uint256,bytes))": FunctionFragment;
     "performVaultChain((bytes32,bytes32,address,address,bool,uint256,uint256,uint256,uint256,bytes,bytes))": FunctionFragment;
@@ -132,6 +133,7 @@ export interface ChainBridgeInterface extends utils.Interface {
     "setVerifiers(address[],bool)": FunctionFragment;
     "supportTokens(address)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
+    "unpause()": FunctionFragment;
     "vaultRecords(bytes32)": FunctionFragment;
     "verifiers(address)": FunctionFragment;
   };
@@ -145,6 +147,7 @@ export interface ChainBridgeInterface extends utils.Interface {
       | "executors"
       | "feeTo"
       | "owner"
+      | "pause"
       | "paused"
       | "performDepositChain"
       | "performVaultChain"
@@ -155,6 +158,7 @@ export interface ChainBridgeInterface extends utils.Interface {
       | "setVerifiers"
       | "supportTokens"
       | "transferOwnership"
+      | "unpause"
       | "vaultRecords"
       | "verifiers"
   ): FunctionFragment;
@@ -181,6 +185,7 @@ export interface ChainBridgeInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "feeTo", values?: undefined): string;
   encodeFunctionData(functionFragment: "owner", values?: undefined): string;
+  encodeFunctionData(functionFragment: "pause", values?: undefined): string;
   encodeFunctionData(functionFragment: "paused", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "performDepositChain",
@@ -218,6 +223,7 @@ export interface ChainBridgeInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     values: [PromiseOrValue<string>]
   ): string;
+  encodeFunctionData(functionFragment: "unpause", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "vaultRecords",
     values: [PromiseOrValue<BytesLike>]
@@ -246,6 +252,7 @@ export interface ChainBridgeInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "executors", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "feeTo", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "pause", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "performDepositChain",
@@ -280,6 +287,7 @@ export interface ChainBridgeInterface extends utils.Interface {
     functionFragment: "transferOwnership",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "unpause", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "vaultRecords",
     data: BytesLike
@@ -408,6 +416,10 @@ export interface ChainBridge extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<[string]>;
 
+    pause(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     paused(overrides?: CallOverrides): Promise<[boolean]>;
 
     performDepositChain(
@@ -457,6 +469,10 @@ export interface ChainBridge extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    unpause(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     vaultRecords(
       arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -487,6 +503,10 @@ export interface ChainBridge extends BaseContract {
   feeTo(overrides?: CallOverrides): Promise<string>;
 
   owner(overrides?: CallOverrides): Promise<string>;
+
+  pause(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   paused(overrides?: CallOverrides): Promise<boolean>;
 
@@ -537,6 +557,10 @@ export interface ChainBridge extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  unpause(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   vaultRecords(
     arg0: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
@@ -567,6 +591,8 @@ export interface ChainBridge extends BaseContract {
     feeTo(overrides?: CallOverrides): Promise<string>;
 
     owner(overrides?: CallOverrides): Promise<string>;
+
+    pause(overrides?: CallOverrides): Promise<void>;
 
     paused(overrides?: CallOverrides): Promise<boolean>;
 
@@ -614,6 +640,8 @@ export interface ChainBridge extends BaseContract {
       newOwner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    unpause(overrides?: CallOverrides): Promise<void>;
 
     vaultRecords(
       arg0: PromiseOrValue<BytesLike>,
@@ -702,6 +730,10 @@ export interface ChainBridge extends BaseContract {
 
     owner(overrides?: CallOverrides): Promise<BigNumber>;
 
+    pause(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     paused(overrides?: CallOverrides): Promise<BigNumber>;
 
     performDepositChain(
@@ -751,6 +783,10 @@ export interface ChainBridge extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    unpause(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     vaultRecords(
       arg0: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
@@ -788,6 +824,10 @@ export interface ChainBridge extends BaseContract {
     feeTo(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    pause(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
 
     paused(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
@@ -835,6 +875,10 @@ export interface ChainBridge extends BaseContract {
 
     transferOwnership(
       newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    unpause(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
